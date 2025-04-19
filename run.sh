@@ -137,10 +137,10 @@ configure(){
     config PROJECT $VALUE
   fi
 
-  echo "Enter cmake minimum required version (Default=3.5)."
+  echo "Enter cmake minimum required version (Default=3.31)."
   read VALUE
   if [[ -z $VALUE ]] ; then
-    config CMAKE_MIN_VERSION "3.5"
+    config CMAKE_MIN_VERSION "3.31"
   else
     config CMAKE_MIN_VERSION $VALUE
   fi
