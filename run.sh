@@ -60,6 +60,7 @@ build(){
     echo "Making debug build."
     cmake -S . -B build -G "Unix Makefiles" -D CMAKE_EXPORT_COMPILE_COMMANDS=1 -D CMAKE_BUILD_TYPE=Debug ${CMAKE_DEFINES}
   else
+    echo "Making release build."
     cmake -S . -B build -G "Unix Makefiles" -D CMAKE_EXPORT_COMPILE_COMMANDS=1 -D CMAKE_BUILD_TYPE=Release ${CMAKE_DEFINES}
   fi
 }
@@ -76,41 +77,22 @@ compile(){
 }
 
 test(){
-  if [[ -e ./build ]] ; then
-    compile
-  else
-    build
-    compile
-  fi
+  compile
   ctest -VV
 }
 
 install(){
-  if [[ -e ./build ]] ; then
-    compile
-  else
-    build
-    compile
-  fi
+  compile
   make install
 }
 
 run(){
-  if [[ -e ./build ]] ; then
-    compile && exec ./$EXENAME
-  else
-    build
-    compile && exec ./$EXENAME
-  fi
+  compile
+  exec ./$EXENAME
 }
 
 debug(){
-  if [[ -e ./build ]] ; then
-    compile
-  else
-    build
-    compile
-  fi
+  compile
   gdb $EXENAME
 }
 
@@ -205,6 +187,8 @@ reconfigure(){
 }
 
 #----------- entry--------------
+
+set -o errexit
 
 if [[ ! -e "./runconfig" && $1 != "help" ]] ; then
   echo "No configurations found! generating now.."
