@@ -11,10 +11,12 @@ just copy the code below to a file named *run* in your project's root directory.
 ```sh
 #!/bin/bash
 
-if [[ -e cmake-buildscript/run.sh ]] ; then
-  exec cmake-buildscript/run.sh $@
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+
+if [[ -e ${SCRIPT_DIR}/cmake-buildscript/run.sh ]] ; then
+  cd ${SCRIPT_DIR} && exec ${SCRIPT_DIR}/cmake-buildscript/run.sh $@
 else
-  git clone https://github.com/ImranSangle/cmake-buildscript && exec cmake-buildscript/run.sh $@
+  git clone https://github.com/ImranSangle/cmake-buildscript ${SCRIPT_DIR} && cd ${SCRIPT_DIR} && exec ${SCRIPT_DIR}/cmake-buildscript/run.sh $@
 fi
 ```
 After that execute:
@@ -48,7 +50,6 @@ or just delete the *cmake-buildscript* directory and run the `./run` it will get
 
 ## Note
 1. Never edit/delete the *runconfig* file manually, it is generated for use by run script only.
-2. the run file must be only executed in the same directory where the file itself is stored.
 
 ## List of commands.
 - **init:** initialize a cmake based project with boilerplate code and directories.
