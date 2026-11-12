@@ -1,0 +1,9 @@
+#!/bin/bash
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+
+if [[ -e ${SCRIPT_DIR}/cmake-buildscript/run.sh ]] ; then
+  cd ${SCRIPT_DIR} && exec ${SCRIPT_DIR}/cmake-buildscript/run.sh $@
+else
+  git clone https://github.com/ImranSangle/cmake-buildscript ${SCRIPT_DIR} && cd ${SCRIPT_DIR} && exec ${SCRIPT_DIR}/cmake-buildscript/run.sh $@
+fi
