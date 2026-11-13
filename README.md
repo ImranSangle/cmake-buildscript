@@ -6,19 +6,10 @@ bash script to create, configure, debug, install, test, and run cmake based cpp 
 
 ---
 ## Usage
-just copy the code below to a file named *run* in your project's root directory.
-### the run file code:
-```sh
-#!/bin/bash
+just download this launcher script in your project's root directory.
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+[⬇️ Download launcher script](./launcher/run)
 
-if [[ -e ${SCRIPT_DIR}/cmake-buildscript/run.sh ]] ; then
-  cd ${SCRIPT_DIR} && exec ${SCRIPT_DIR}/cmake-buildscript/run.sh $@
-else
-  git clone https://github.com/ImranSangle/cmake-buildscript ${SCRIPT_DIR} && cd ${SCRIPT_DIR} && exec ${SCRIPT_DIR}/cmake-buildscript/run.sh $@
-fi
-```
 After that execute:
 
 `./run init`
