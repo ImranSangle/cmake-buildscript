@@ -35,7 +35,7 @@ create_cmakelist(){
 }
 
 create_main(){
-  echo -e "\nint main(int argc,char* argv[]){\n\nreturn 0;\n\n}" > src/main.cpp
+  echo -e "\nint main(int argc,char* argv[]){\n\nreturn 0;\n\n}" > src/${EXENAME}.cpp
 }
 
 init(){
